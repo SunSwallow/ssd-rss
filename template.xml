@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<container version="2">
+  <name>rss-putao</name>
+  <repository>sunswallow/sjtu-pt-rss:0.1</repository>
+  <registry/>
+  <network>bridge</network>
+  <myip/>
+  <shell>sh</shell>
+  <privileged>false</privileged>
+  <support/>
+  <project/>
+  <overview/>
+  <category/>
+  <webui/>
+  <templateurl/>
+  <icon/>
+  <extraparams/>
+  <postargs/>
+  <cpuset/>
+  <dateinstalled>1701180403</dateinstalled>
+  <donatetext/>
+  <donatelink/>
+  <requires/>
+  <config name="host port 1" target="80" default="9898" mode="tcp" description="网络端口" type="port" display="always" required="false" mask="false"></config>
+  <config name="cookies" target="cookies" default="none" mode="" description="网页cookies" type="variable" display="always" required="false" mask="false"></config>
+  <config name="refreshing_minute" target="refreshing_minute" default="none" mode="" description="种子刷新时间" type="variable" display="always" required="false" mask="false"></config>
+  <config name="min" target="min" default="none" mode="" description="最小的种子大小" type="variable" display="always" required="false" mask="false"></config>
+  <config name="max" target="max" default="none" mode="" description="最大的种子大小" type="variable" display="always" required="false" mask="false"></config>
+</container>
