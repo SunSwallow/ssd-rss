@@ -150,7 +150,7 @@ def rss():
 
     now = datetime.datetime.now()
     for (week, hour) in get_refresh_time(args.refreshing_hour):
-        if now.weekday() >= week and now.hour>= hour: # 当前时间越过某一个更新时刻
+        if (now.weekday(), now.hour) >= (week, hour): # 当前时间越过某一个更新时刻
             if now.isocalendar().week > refresh_time.isocalendar().week: # 进入新的一周，达到更新时间便更新
                 my_print(f'Now  Time Week: {now.isocalendar().week}, Now  Time: {now.strftime("%Y-%m-%d %H:%M:%S")}')
                 my_print(f'Last Time Week: {refresh_time.isocalendar().week}, Last Time: {refresh_time.strftime("%Y-%m-%d %H:%M:%S")}')
@@ -158,7 +158,7 @@ def rss():
                 refresh_time = datetime.datetime.now()
                 rss_items = get_torrent_ssd(args, session, user_headers, refresh_time)
                 break
-            elif week>=refresh_time.weekday() and hour > refresh_time.hour: # 上次更新时刻在该更新时刻之前
+            elif (week, hour)>(refresh_time.weekday(), refresh_time.hour): # 上次更新时刻在该更新时刻之前
                 my_print(f'Now  Time Week: {now.isocalendar().week}, Now  Time: {now.strftime("%Y-%m-%d %H:%M:%S")}')
                 my_print(f'Last Time Week: {refresh_time.isocalendar().week}, Last Time: {refresh_time.strftime("%Y-%m-%d %H:%M:%S")}')
                 my_print(f'Update Scheduler: {str(get_refresh_time(args.refreshing_hour))}')
