@@ -23,7 +23,7 @@
   <requires/>
   <config name="host port 1" target="80" default="9898" mode="tcp" description="网络端口" type="port" display="always" required="false" mask="false"></config>
   <config name="cookies" target="cookies" default="none" mode="" description="网页cookies" type="variable" display="always" required="false" mask="false"></config>
-  <config name="refreshing_minute" target="refreshing_minute" default="none" mode="" description="种子刷新时间" type="variable" display="always" required="false" mask="false"></config>
+  <config name="refreshing_hour" target="refreshing_hour" default="none" mode="" description="种子刷新时间,合法输入示例：10,7 或者 1H3,4H10" type="variable" display="always" required="false" mask="false"></config>
   <config name="min" target="min" default="none" mode="" description="最小的种子大小" type="variable" display="always" required="false" mask="false"></config>
   <config name="max" target="max" default="none" mode="" description="最大的种子大小" type="variable" display="always" required="false" mask="false"></config>
 </container>

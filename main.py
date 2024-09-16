@@ -7,8 +7,41 @@ import re
 import datetime
 from flask import Flask, Response
 import time
+import logging
+# logging.getLogger('werkzeug').disabled = True
+
+logging.basicConfig(
+    filename='app.log',      # 指定日志文件名
+    level=logging.WARN,      # 设置日志级别
+    format='%(asctime)s - %(levelname)s - %(message)s'  # 设置日志格式
+)
+
+def my_print(string):
+    print(string)
+    logging.warning(string)
 
 
+def get_refresh_time(inputs):
+    '''
+    函数的作用是传入特定格式的刷新时间，返回一周内所有的刷新时间，目前支持两种输入：
+    1. 如果想每天都刷新种子，传入 ","分割的24小时时间，例如：
+        "10"代表每天10点更新，"10,18"代表每天上午10点，下午6点更新
+    2. 按周指定时间，每个时间点为0H13，第一个数字代表周几（1代表周一），第二个数字代表小时数
+        "1H3,4H20"代表周二凌晨3点与周五晚上8点
+    '''
+    time_stamps = []
+    if "H" not in inputs: # 代表模式1
+        hours = [int(i) for i in inputs.split(",")]
+        
+        for weekday in range(7):
+            for hour in hours:
+                time_stamps.append((weekday, hour))
+    else:
+        weekday_hours = inputs.split(",")
+        for weekday_hour in weekday_hours:
+            weekday, hour = int(weekday_hour.split("H")[0])-1, int(weekday_hour.split("H")[1])
+            time_stamps.append((weekday, hour))
+    return time_stamps
 
 
 def time_to_minutes(time_str):
@@ -30,8 +63,6 @@ def parse_cookies(cookies_str):
         key, value = cookie.split('=', 1)
         cookies[key] = value
     return cookies
-
-
 
 def get_torrent_info_putao(table_row, args, refresh_time):
 
@@ -98,7 +129,7 @@ user_headers = {
 parser = argparse.ArgumentParser(description='Login to a website using cookies from command line.')
 parser.add_argument('--cookies',type=str)
 parser.add_argument("--port", default=80, type=int)
-parser.add_argument("--refreshing_minute", default=0, type=int, help="The frequency to refresh the torrent list")
+parser.add_argument("--refreshing_hour", default="10", type=str, help="What hour to refresh the torrent")
 parser.add_argument("--min", default=0, type=int, help="min size (GB)")
 parser.add_argument("--max", default=100, type=int, help="max size (GB)")
 args = parser.parse_args()
@@ -107,20 +138,35 @@ session = requests.Session()
 # rss_items = get_torrent_putao(args, session, user_headers)
 app = Flask(__name__)
 
-start_time = time.time()
+my_print(f'Update Scheduler: {str(get_refresh_time(args.refreshing_hour))}')
+my_print(f'Last Time Week: {datetime.datetime.now().isocalendar().week}, Last Time: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 refresh_time = datetime.datetime.now()
 rss_items = get_torrent_ssd(args, session, user_headers, refresh_time)
 print(refresh_time.strftime("%Y-%m-%d %H:%M:%S"))
 
 @app.route('/')
 def rss():
-    global start_time, rss_items, refresh_time
+    global rss_items, refresh_time
 
-    if time.time() - start_time > args.refreshing_minute*60 or args.refreshing_minute==0:
-        start_time = time.time()
-        refresh_time = datetime.datetime.now()
-        rss_items = get_torrent_ssd(args, session, user_headers, refresh_time)
-        print("Refresh Now")
+    now = datetime.datetime.now()
+    for (week, hour) in get_refresh_time(args.refreshing_hour):
+        if now.weekday() >= week and now.hour>= hour: # 当前时间越过某一个更新时刻
+            if now.isocalendar().week > refresh_time.isocalendar().week: # 进入新的一周，达到更新时间便更新
+                my_print(f'Now  Time Week: {now.isocalendar().week}, Now  Time: {now.strftime("%Y-%m-%d %H:%M:%S")}')
+                my_print(f'Last Time Week: {refresh_time.isocalendar().week}, Last Time: {refresh_time.strftime("%Y-%m-%d %H:%M:%S")}')
+                my_print(f'Update Scheduler: {str(get_refresh_time(args.refreshing_hour))}')
+                refresh_time = datetime.datetime.now()
+                rss_items = get_torrent_ssd(args, session, user_headers, refresh_time)
+                break
+            elif week>=refresh_time.weekday() and hour > refresh_time.hour: # 上次更新时刻在该更新时刻之前
+                my_print(f'Now  Time Week: {now.isocalendar().week}, Now  Time: {now.strftime("%Y-%m-%d %H:%M:%S")}')
+                my_print(f'Last Time Week: {refresh_time.isocalendar().week}, Last Time: {refresh_time.strftime("%Y-%m-%d %H:%M:%S")}')
+                my_print(f'Update Scheduler: {str(get_refresh_time(args.refreshing_hour))}')
+                refresh_time = datetime.datetime.now()
+                rss_items = get_torrent_ssd(args, session, user_headers, refresh_time)
+                break
+            else:
+                pass # do nothing
 
     rss = PyRSS2Gen.RSS2(title='SSD RSS订阅', link="http://127.0.0.1:{}".format(args.port), description='自定义RSS订阅', pubDate=datetime.datetime.utcnow(), items=rss_items)
     rss = rss.to_xml()
