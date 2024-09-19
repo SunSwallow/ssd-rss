@@ -1,0 +1,77 @@
+2024-09-19 15:16:29,320 - WARNING - Update Scheduler: [(0, 10), (0, 20), (1, 10), (1, 20), (2, 10), (2, 20), (3, 10), (3, 20), (4, 10), (4, 20), (5, 10), (5, 20), (6, 10), (6, 20)]
+2024-09-19 15:17:54,379 - WARNING - Update Scheduler: [(0, 10), (0, 20), (1, 10), (1, 20), (2, 10), (2, 20), (3, 10), (3, 20), (4, 10), (4, 20), (5, 10), (5, 20), (6, 10), (6, 20)]
+2024-09-19 15:22:57,583 - WARNING - Update Scheduler: [(0, 10), (0, 20), (1, 10), (1, 20), (2, 10), (2, 20), (3, 10), (3, 20), (4, 10), (4, 20), (5, 10), (5, 20), (6, 10), (6, 20)]
+2024-09-19 15:22:57,583 - WARNING - Last Time Week: 38, Last Time: 2024-09-19 15:22:57
+2024-09-19 15:22:57,587 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://198.18.0.1:80
+2024-09-19 15:22:57,588 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-19 15:23:09,318 - INFO - 127.0.0.1 - - [19/Sep/2024 15:23:09] "GET / HTTP/1.1" 200 -
+2024-09-19 15:23:09,878 - INFO - 127.0.0.1 - - [19/Sep/2024 15:23:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2024-09-19 15:32:03,136 - WARNING - Update Scheduler: [(0, 10), (0, 20), (1, 10), (1, 20), (2, 10), (2, 20), (3, 10), (3, 20), (4, 10), (4, 20), (5, 10), (5, 20), (6, 10), (6, 20)]
+2024-09-19 15:32:03,136 - WARNING - Last Time Week: 38, Last Time: 2024-09-19 15:32:03
+2024-09-19 15:32:03,138 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://198.18.0.1:80
+2024-09-19 15:32:03,138 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-19 15:32:14,127 - WARNING - Update Scheduler: [(0, 10), (0, 20), (1, 10), (1, 20), (2, 10), (2, 20), (3, 10), (3, 20), (4, 10), (4, 20), (5, 10), (5, 20), (6, 10), (6, 20)]
+2024-09-19 15:32:14,128 - WARNING - Last Time Week: 38, Last Time: 2024-09-19 15:32:14
+2024-09-19 15:32:16,172 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://198.18.0.1:80
+2024-09-19 15:32:16,172 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-19 15:32:26,666 - INFO - 127.0.0.1 - - [19/Sep/2024 15:32:26] "GET / HTTP/1.1" 200 -
+2024-09-19 15:33:41,303 - WARNING - Update Scheduler: [(0, 10), (0, 20), (1, 10), (1, 20), (2, 10), (2, 20), (3, 10), (3, 20), (4, 10), (4, 20), (5, 10), (5, 20), (6, 10), (6, 20)]
+2024-09-19 15:33:41,303 - WARNING - Last Time Week: 38, Last Time: 2024-09-19 15:33:41
+2024-09-19 15:33:42,786 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://198.18.0.1:80
+2024-09-19 15:33:42,786 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-19 15:33:47,083 - INFO - 127.0.0.1 - - [19/Sep/2024 15:33:47] "GET / HTTP/1.1" 200 -
+2024-09-19 15:33:50,069 - INFO - 127.0.0.1 - - [19/Sep/2024 15:33:50] "GET / HTTP/1.1" 200 -
+2024-09-19 15:34:22,373 - WARNING - Update Scheduler: [(0, 10), (0, 20), (1, 10), (1, 20), (2, 10), (2, 20), (3, 10), (3, 20), (4, 10), (4, 20), (5, 10), (5, 20), (6, 10), (6, 20)]
+2024-09-19 15:34:22,373 - WARNING - Last Time Week: 38, Last Time: 2024-09-19 15:34:22
+2024-09-19 15:34:23,835 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://198.18.0.1:80
+2024-09-19 15:34:23,835 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-19 15:34:24,654 - INFO - 127.0.0.1 - - [19/Sep/2024 15:34:24] "GET / HTTP/1.1" 200 -
+2024-09-19 15:34:26,344 - INFO - 127.0.0.1 - - [19/Sep/2024 15:34:26] "GET / HTTP/1.1" 200 -
+2024-09-19 15:34:27,118 - INFO - 127.0.0.1 - - [19/Sep/2024 15:34:27] "GET / HTTP/1.1" 200 -
+2024-09-19 15:34:38,416 - WARNING - Update Scheduler: [(0, 10), (0, 20), (1, 10), (1, 20), (2, 10), (2, 20), (3, 10), (3, 20), (4, 10), (4, 20), (5, 10), (5, 20), (6, 10), (6, 20)]
+2024-09-19 15:34:38,416 - WARNING - Last Time Week: 38, Last Time: 2024-09-19 15:34:38
+2024-09-19 15:34:39,613 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://198.18.0.1:80
+2024-09-19 15:34:39,613 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-19 15:34:43,151 - INFO - 127.0.0.1 - - [19/Sep/2024 15:34:43] "GET / HTTP/1.1" 200 -
+2024-09-19 15:35:41,237 - WARNING - Update Scheduler: [(0, 10), (0, 20), (1, 10), (1, 20), (2, 10), (2, 20), (3, 10), (3, 20), (4, 10), (4, 20), (5, 10), (5, 20), (6, 10), (6, 20)]
+2024-09-19 15:35:41,237 - WARNING - Last Time Week: 38, Last Time: 2024-09-19 15:35:41
+2024-09-19 15:35:43,209 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://198.18.0.1:80
+2024-09-19 15:35:43,209 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-19 15:35:44,690 - INFO - 127.0.0.1 - - [19/Sep/2024 15:35:44] "GET / HTTP/1.1" 200 -
+2024-09-19 15:45:22,552 - WARNING - Update Scheduler: [(0, 10), (0, 20), (1, 10), (1, 20), (2, 10), (2, 20), (3, 10), (3, 20), (4, 10), (4, 20), (5, 10), (5, 20), (6, 10), (6, 20)]
+2024-09-19 15:45:22,552 - WARNING - Last Time Week: 38, Last Time: 2024-09-19 15:45:22
+2024-09-19 15:45:24,205 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://198.18.0.1:80
+2024-09-19 15:45:24,205 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-19 15:45:26,417 - INFO - 127.0.0.1 - - [19/Sep/2024 15:45:26] "GET / HTTP/1.1" 200 -
+2024-09-19 15:45:51,641 - WARNING - Update Scheduler: [(0, 10), (0, 20), (1, 10), (1, 20), (2, 10), (2, 20), (3, 10), (3, 20), (4, 10), (4, 20), (5, 10), (5, 20), (6, 10), (6, 20)]
+2024-09-19 15:45:51,641 - WARNING - Last Time Week: 38, Last Time: 2024-09-19 15:45:51
+2024-09-19 15:45:53,583 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://198.18.0.1:80
+2024-09-19 15:45:53,583 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-19 15:45:55,470 - INFO - 127.0.0.1 - - [19/Sep/2024 15:45:55] "GET / HTTP/1.1" 200 -

@@ -79,17 +79,22 @@ def get_torrent_info_putao(table_row, args, refresh_time):
 
     description = table_row.select(".torrent-smalldescr")[0].select("span")[-1].get("title")
 
-    size_ok = False
+    satisfying_size_limit = False
+    is_below_max_size = False
+    
     if "GB" in size:
         num = float(size.split("GB")[0])
         if  args.min<num<args.max:
-            size_ok = True
-    comments = f"Free:{free_flag} || Size:{size} || Time:{survival_time_minutes} Minuts || Size OK: {size_ok} || "
+            satisfying_size_limit = True
+        if num<args.max:
+            is_below_max_size = True
+
+    comments = f"Free:{free_flag} || Size:{size} || Time:{survival_time_minutes} Minuts || Satisfying Size Limit: {satisfying_size_limit} || "
     comments += "Refresh Time: {}".format(refresh_time.strftime("%Y-%m-%d %H:%M:%S"))
     rss_item = PyRSS2Gen.RSSItem(title=name, link=download_href, description=description, 
         comments=comments)
 
-    return survival_time_minutes, size_ok, rss_item
+    return survival_time_minutes, satisfying_size_limit, is_below_max_size, rss_item
 
 
 
@@ -108,17 +113,27 @@ def get_torrent_ssd(args, session, headers, refresh_time):
     soup = BeautifulSoup(response.text, 'html.parser')
     table_rows = soup.select('tr.sticky_bg')
 
-    items = []
+    items = [] # 大小符合的种子
+    items_no_size_limit = [] # 没有大小限制的种子
     for table_row in table_rows:
-        rss_item_with_info = get_torrent_info_putao(table_row, args, refresh_time)
-        if rss_item_with_info[2] is not None and rss_item_with_info[1]:
-            items.append(rss_item_with_info)
+        survival_time_minutes, satisfying_size_limit, is_below_max_size, rss_item = get_torrent_info_putao(table_row, args, refresh_time)
+        if rss_item is not None:
+            if satisfying_size_limit:
+                items.append((survival_time_minutes, rss_item))
+            if is_below_max_size:
+                items_no_size_limit.append((survival_time_minutes, rss_item))
+        
     latest_item = None
     latest_survival_time = 1e20
-    for i in items:
-        if i[0]<latest_survival_time:
-            latest_survival_time = i[0]
-            latest_item = i[2]
+    for (survival_time_minutes, rss_item) in items:
+        if survival_time_minutes<latest_survival_time and survival_time_minutes<=args.max_survival_minutes:
+            latest_survival_time = survival_time_minutes
+            latest_item = rss_item
+    if latest_item is not None: return [latest_item]
+    for (survival_time_minutes, rss_item) in items_no_size_limit:
+        if survival_time_minutes<latest_survival_time:
+            latest_survival_time = survival_time_minutes
+            latest_item = rss_item
     return [latest_item]
 
 
@@ -132,6 +147,8 @@ parser.add_argument("--port", default=80, type=int)
 parser.add_argument("--refreshing_hour", default="10", type=str, help="What hour to refresh the torrent")
 parser.add_argument("--min", default=0, type=int, help="min size (GB)")
 parser.add_argument("--max", default=100, type=int, help="max size (GB)")
+parser.add_argument("--refreshing_now", default=0, type=int, help="get torrents when starting docker")
+parser.add_argument("--max_survival_minutes", default=60, type=int, help="max survival minutes, torrents older than it will not be added")
 args = parser.parse_args()
 print(args)
 session = requests.Session()
@@ -141,7 +158,10 @@ app = Flask(__name__)
 my_print(f'Update Scheduler: {str(get_refresh_time(args.refreshing_hour))}')
 my_print(f'Last Time Week: {datetime.datetime.now().isocalendar().week}, Last Time: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 refresh_time = datetime.datetime.now()
-rss_items = get_torrent_ssd(args, session, user_headers, refresh_time)
+if args.refreshing_now:
+    rss_items = get_torrent_ssd(args, session, user_headers, refresh_time)
+else:
+    rss_items = []
 print(refresh_time.strftime("%Y-%m-%d %H:%M:%S"))
 
 @app.route('/')
